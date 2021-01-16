@@ -168,6 +168,9 @@ pub enum WorkerAction {
   QueryResult(Uuid, QueryResult),
 }
 
+// upd: Ещё немного подумав, я сообразил, что можно было обойтись одним
+// лупом с селектом и двумя, а то и одним каналом
+// тем самым избавиться от ненужного delay_for на 25ms
 pub fn start(tasks: Storage) -> UnboundedSender<WorkerAction> {
   let (worker_tr, mut worker_rx) = unbounded_channel::<WorkerAction>();
 
